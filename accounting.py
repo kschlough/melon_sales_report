@@ -11,26 +11,35 @@ melon_prices = { "Musk": 1.15, "Hybrid": 1.30, "Watermelon": 1.75, "Winter": 4.0
 
 
 def melons_sold(file):
+    total_revenue = 0
 
     for line in file:
         data = line.strip().split("|")
         melon_type = data[1]
         melon_count = int(data[2])
         melon_tallies[melon_type] += melon_count
+    for melon_type in melon_tallies:
+            price = melon_prices[melon_type]
+            revenue = price * melon_tallies[melon_type]
+            total_revenue += revenue
+            # print("We sold %d %s melons at %0.2f each for a total of %0.2f" % (melon_tallies[melon_type], melon_type, price, revenue))
+            print(f"We sold {melon_tallies[melon_type]} {melon_type} melons at ${price} each for a total of ${revenue}")
+
 
 melons_sold(file)  
 
-def melon_revenue(melons_sold): 
+# def melon_revenue(melons_sold): 
 
-    total_revenue = 0
-    for melon_type in melon_tallies:
-        price = melon_prices[melon_type]
-        revenue = price * melon_tallies[melon_type]
-        total_revenue += revenue
-        # print("We sold %d %s melons at %0.2f each for a total of %0.2f" % (melon_tallies[melon_type], melon_type, price, revenue))
-    print(f"We sold {melon_tallies[melon_type]} {melon_type} melons at ${price} each for a total of ${revenue}")
+    # total_revenue = 0
+    # for line in file:
+    #     for melon_type in melon_tallies:
+    #         price = melon_prices[melon_type]
+    #         revenue = price * melon_tallies[melon_type]
+    #         total_revenue += revenue
+    #         # print("We sold %d %s melons at %0.2f each for a total of %0.2f" % (melon_tallies[melon_type], melon_type, price, revenue))
+    # print(f"We sold {melon_tallies[melon_type]} {melon_type} melons at ${price} each for a total of ${revenue}")
 
-melon_revenue(melons_sold)
+# melon_revenue(melons_sold)
 line_separate()
 file.close()
 
